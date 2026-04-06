@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kotobado — The way of words</title>
+<meta name="description" content="Kotobado is a Japanese vocabulary app built around spaced repetition, retrieval practice, and neuroscience-informed review design.">
+<meta name="theme-color" content="#F7F6F3">
+<meta property="og:title" content="Kotobado — The way of words">
+<meta property="og:description" content="Japanese vocabulary that actually stays with you, built on spaced repetition and neuroscience-informed review design.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kotobado — The way of words">
+<meta name="twitter:description" content="Japanese vocabulary that actually stays with you, built on spaced repetition and neuroscience-informed review design.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -23,7 +32,7 @@
   --r-sm: 10px;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 
 body {
   font-family: 'DM Sans', sans-serif;
@@ -32,6 +41,16 @@ body {
   font-size: 17px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+}
+
+body.nav-open { overflow: hidden; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* ── NAV ── */
@@ -61,12 +80,14 @@ nav {
   display: flex; align-items: center; gap: 32px;
   list-style: none;
 }
+.nav-links li { display: flex; align-items: center; }
 .nav-links a {
   text-decoration: none;
   font-size: 14px;
   font-weight: 400;
   color: var(--ink-2);
   transition: color 0.2s;
+  white-space: nowrap;
 }
 .nav-links a:hover { color: var(--ink); }
 .nav-cta {
@@ -78,10 +99,112 @@ nav {
   transition: opacity 0.2s !important;
 }
 .nav-cta:hover { opacity: 0.75 !important; color: var(--white) !important; }
+.nav-menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 0.5px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.72);
+  color: var(--ink);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-direction: column;
+}
+.nav-menu-toggle span {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.nav-menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+.mobile-menu {
+  display: none;
+}
+.mobile-menu-inner {
+  background: rgba(247,246,243,0.98);
+  backdrop-filter: blur(14px);
+  border-bottom: 0.5px solid var(--border);
+  padding: 16px 20px 24px;
+}
+.nav-mobile-links {
+  display: grid;
+  gap: 10px;
+}
+.nav-mobile-links a {
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 15px;
+}
+.nav-mobile-links .nav-cta {
+  justify-content: center;
+  border: none;
+  padding: 14px 16px;
+}
 
 /* ── SECTIONS ── */
 section { padding: 120px 32px; max-width: 1080px; margin: 0 auto; }
 section.full { max-width: none; padding-left: 0; padding-right: 0; }
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.max-500 { max-width: 500px; }
+.max-560 { max-width: 560px; }
+.max-600 { max-width: 600px; }
+.section-intro {
+  font-size: 16px;
+  color: var(--ink-2);
+  max-width: 500px;
+  margin-top: 16px;
+  line-height: 1.75;
+}
+.eyebrow-note {
+  font-size: 14px;
+  color: var(--ink-3);
+}
+.mini-kicker {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 20px;
+}
+.small-note {
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+.surface-note {
+  margin-top: 24px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border-radius: var(--r-sm);
+}
+.tone-indigo { background: #4f46e5; }
+.tone-orange { background: #d85a30; }
+.tone-green { background: #1d9e75; }
+.tone-verb { background: #1D9E75; }
+.tone-noun { background: #378ADD; }
+.tone-adj { background: #D85A30; }
+.tone-particle { background: #BA7517; }
+.tone-grammar { background: #7F77DD; }
+.fill-45 { width: 45%; }
+.fill-75 { width: 75%; }
+.fill-88 { width: 88%; }
 
 /* ── HERO ── */
 .hero {
@@ -429,10 +552,50 @@ section.full { max-width: none; padding-left: 0; padding-right: 0; }
 }
 .g-leg { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-3); }
 .g-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.galaxy-stage {
+  display: grid;
+  gap: 14px;
+}
+.galaxy-canvas-wrap {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 12px;
+}
 #galaxy-canvas {
   border-radius: var(--r);
   display: block;
   background: #F0EFE9;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin: 0 auto;
+  touch-action: manipulation;
+}
+.galaxy-detail {
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px 20px;
+  min-height: 108px;
+}
+.galaxy-detail-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 10px;
+}
+.galaxy-detail-title {
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.galaxy-detail-meta {
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.7;
 }
 
 /* ── HOW IT WORKS ── */
@@ -465,6 +628,10 @@ section.full { max-width: none; padding-left: 0; padding-right: 0; }
 }
 
 /* ── CTA ── */
+.cta-shell {
+  max-width: 1080px;
+  margin: 0 auto;
+}
 .cta-section {
   text-align: center;
   padding: 120px 32px;
@@ -508,6 +675,24 @@ footer {
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
   .nav-links { display: none; }
+  .nav-menu-toggle { display: inline-flex; }
+  .mobile-menu {
+    display: block;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .mobile-menu.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
   section { padding: 80px 20px; }
   .comparison-grid, .neuro-grid { grid-template-columns: 1fr; }
   .fsrs-layout, .galaxy-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -515,17 +700,52 @@ footer {
   .how-steps { grid-template-columns: 1fr 1fr; }
   footer { flex-direction: column; gap: 16px; text-align: center; }
   .hero h1 { font-size: 44px; }
+  .hero-actions { flex-direction: column; }
   .demo-card { padding: 36px 28px 28px; }
   .demo-kanji { font-size: 72px; }
+  .cta-section { padding: 96px 20px; }
+  .galaxy-detail { min-height: 0; }
+}
+
+@media (max-width: 560px) {
+  .how-steps { grid-template-columns: 1fr; }
+  .fsrs-stat-row { flex-direction: column; gap: 20px; }
+  .fsrs-var-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 12px;
+  }
+  .fsrs-var-name,
+  .fsrs-bar-wrap {
+    width: auto;
+    margin-left: 0;
+  }
+  .fsrs-var-desc,
+  .fsrs-bar-wrap {
+    grid-column: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .mobile-menu,
+  .nav-menu-toggle span {
+    transition: none;
+  }
 }
 </style>
 </head>
-<body>
+<body id="top">
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">
-    <svg width="28" height="42" viewBox="0 0 52 78" xmlns="http://www.w3.org/2000/svg">
+  <a href="#top" class="nav-logo" aria-label="Kotobado home">
+    <svg width="28" height="42" viewBox="0 0 52 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
       <rect x="13" y="0" width="26" height="3.6" rx="1.4" fill="#1A1A1A"/>
       <rect x="0" y="12.4" width="52" height="3.6" rx="1.4" fill="#1A1A1A"/>
       <rect x="1.75" y="26.4" width="48.5" height="48.5" rx="3.5" fill="none" stroke="#1A1A1A" stroke-width="3.5"/>
@@ -536,9 +756,24 @@ footer {
     <li><a href="#science">The science</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#how">How it works</a></li>
-    <li><a href="#" class="nav-cta">Become a beta-tester</a></li>
+    <li><a href="#beta" class="nav-cta">Become a beta-tester</a></li>
   </ul>
+  <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-inner">
+    <div class="nav-mobile-links">
+      <a href="#science">The science</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#beta" class="nav-cta">Become a beta-tester</a>
+    </div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -551,7 +786,7 @@ footer {
     Every review is engineered to create a stronger memory trace.
   </p>
   <div class="hero-actions reveal reveal-delay-3">
-    <a href="#" class="btn-primary">Start learning free</a>
+    <a href="#beta" class="btn-primary">Start learning free</a>
     <a href="#science" class="btn-ghost">See the science ↓</a>
   </div>
 
@@ -562,9 +797,9 @@ footer {
       <div class="demo-kanji">語</div>
       <p class="demo-hint">what is the reading and meaning?</p>
       <div class="demo-conf-row">
-        <button class="demo-conf-btn">No clue</button>
-        <button class="demo-conf-btn">Vague idea</button>
-        <button class="demo-conf-btn">I know it</button>
+        <button class="demo-conf-btn" type="button">No clue</button>
+        <button class="demo-conf-btn" type="button">Vague idea</button>
+        <button class="demo-conf-btn" type="button">I know it</button>
       </div>
     </div>
   </div>
@@ -575,10 +810,10 @@ footer {
 <!-- COMPARISON -->
 <section id="comparison">
   <p class="section-label reveal">How we're different</p>
-  <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-0.02em;max-width:560px;">
+  <h2 class="section-title max-560 reveal">
     Built on the shoulders of giants
   </h2>
-  <p class="reveal" style="font-size:16px;color:var(--ink-2);max-width:500px;margin-top:16px;line-height:1.75;">
+  <p class="section-intro reveal">
     Anki and WaniKani are excellent tools that have helped millions of learners. Kotobado takes what works in both and goes further.
   </p>
 
@@ -632,7 +867,7 @@ footer {
       <p class="reveal">
         FSRS (Free Spaced Repetition Scheduler) was developed in 2022 using machine learning on millions of real reviews. It models three variables per card — stability, difficulty, and retrievability — and shows each card precisely when your recall probability drops to your target threshold.
       </p>
-      <p class="reveal" style="font-size:14px;color:var(--ink-3);">
+      <p class="eyebrow-note reveal">
         Peer-reviewed at ACM KDD. Used by Anki, RemNote, and now Kotobado.
       </p>
       <div class="fsrs-stat-row reveal">
@@ -648,27 +883,27 @@ footer {
     </div>
 
     <div class="fsrs-visual reveal">
-      <p style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:20px;">Three variables per card</p>
+      <p class="mini-kicker">Three variables per card</p>
       <div class="fsrs-var-row">
-        <div class="fsrs-var-dot" style="background:#4f46e5;"></div>
+        <div class="fsrs-var-dot tone-indigo"></div>
         <div class="fsrs-var-name">Stability</div>
         <div class="fsrs-var-desc">How long until you forget it. Grows with every successful recall.</div>
-        <div class="fsrs-bar-wrap"><div class="fsrs-bar" style="width:75%;background:#4f46e5;"></div></div>
+        <div class="fsrs-bar-wrap"><div class="fsrs-bar tone-indigo fill-75"></div></div>
       </div>
       <div class="fsrs-var-row">
-        <div class="fsrs-var-dot" style="background:#d85a30;"></div>
+        <div class="fsrs-var-dot tone-orange"></div>
         <div class="fsrs-var-name">Difficulty</div>
         <div class="fsrs-var-desc">Intrinsic hardness of the card. Learned from your own review history.</div>
-        <div class="fsrs-bar-wrap"><div class="fsrs-bar" style="width:45%;background:#d85a30;"></div></div>
+        <div class="fsrs-bar-wrap"><div class="fsrs-bar tone-orange fill-45"></div></div>
       </div>
       <div class="fsrs-var-row">
-        <div class="fsrs-var-dot" style="background:#1d9e75;"></div>
+        <div class="fsrs-var-dot tone-green"></div>
         <div class="fsrs-var-name">Retrievability</div>
         <div class="fsrs-var-desc">Your current recall probability. Decays continuously between reviews.</div>
-        <div class="fsrs-bar-wrap"><div class="fsrs-bar" style="width:88%;background:#1d9e75;"></div></div>
+        <div class="fsrs-bar-wrap"><div class="fsrs-bar tone-green fill-88"></div></div>
       </div>
-      <div style="margin-top:24px;padding:14px 16px;background:var(--paper);border-radius:var(--r-sm);">
-        <p style="font-size:12px;color:var(--ink-2);line-height:1.6;">
+      <div class="surface-note">
+        <p class="small-note">
           Kotobado also adjusts scheduling based on your pre-flip confidence rating — a second signal that catches overconfidence, the most common cause of SRS failure.
         </p>
       </div>
@@ -681,7 +916,7 @@ footer {
 <!-- NEUROSCIENCE -->
 <section>
   <p class="section-label reveal">The neuroscience</p>
-  <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-0.02em;max-width:600px;">
+  <h2 class="section-title max-600 reveal">
     Features designed around how memory actually works
   </h2>
 
@@ -791,16 +1026,25 @@ footer {
       <h2 class="reveal">Your deck as a living system</h2>
       <p class="reveal">Every card orbits a center point. Distance from center = days until due. Size = stability. Opacity = current retrievability — how likely you are to recall it right now.</p>
       <p class="reveal">Cards drift inward as memory fades. Due cards pulse. Mature memories sit in the outer rings, large and bright. A struggling card is small, faint, and close to the center.</p>
-      <p class="reveal" style="font-size:14px;color:var(--ink-3);">Hover a card to inspect its exact stability, retrievability, and next due date.</p>
+      <p class="eyebrow-note reveal">Tap or hover a card to inspect its stability, retrievability, and next due date.</p>
       <div class="galaxy-legend reveal">
-        <div class="g-leg"><div class="g-dot" style="background:#1D9E75;"></div>verbs</div>
-        <div class="g-leg"><div class="g-dot" style="background:#378ADD;"></div>nouns</div>
-        <div class="g-leg"><div class="g-dot" style="background:#D85A30;"></div>adjectives</div>
-        <div class="g-leg"><div class="g-dot" style="background:#BA7517;"></div>particles</div>
-        <div class="g-leg"><div class="g-dot" style="background:#7F77DD;"></div>grammar</div>
+        <div class="g-leg"><div class="g-dot tone-verb"></div>verbs</div>
+        <div class="g-leg"><div class="g-dot tone-noun"></div>nouns</div>
+        <div class="g-leg"><div class="g-dot tone-adj"></div>adjectives</div>
+        <div class="g-leg"><div class="g-dot tone-particle"></div>particles</div>
+        <div class="g-leg"><div class="g-dot tone-grammar"></div>grammar</div>
       </div>
     </div>
-    <canvas id="galaxy-canvas" width="420" height="380"></canvas>
+    <div class="galaxy-stage reveal">
+      <div class="galaxy-canvas-wrap">
+        <canvas id="galaxy-canvas" width="420" height="380" role="img" aria-label="Animated deck map showing cards by due date, stability, and retrievability."></canvas>
+      </div>
+      <div class="galaxy-detail" id="galaxy-detail" aria-live="polite">
+        <p class="galaxy-detail-label">Deck snapshot</p>
+        <p class="galaxy-detail-title" id="galaxy-detail-title">Tap or hover a card to inspect it.</p>
+        <p class="galaxy-detail-meta" id="galaxy-detail-meta">Distance shows the due date, size shows stability, and opacity shows current retrievability.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -809,7 +1053,7 @@ footer {
 <!-- HOW IT WORKS -->
 <section id="how">
   <p class="section-label reveal">How it works</p>
-  <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-0.02em;max-width:560px;">
+  <h2 class="section-title max-560 reveal">
     One review loop, engineered for depth
   </h2>
 
@@ -840,21 +1084,21 @@ footer {
 <div class="divider"></div>
 
 <!-- CTA -->
-<div style="max-width:1080px;margin:0 auto;">
+<section id="beta" class="cta-shell">
   <div class="cta-section">
     <h2 class="reveal">Start the way of words</h2>
-    <p class="reveal">Free to use. No account needed to begin. Your first session takes two minutes to set up.</p>
+    <p class="reveal">Jump to the beta overview, see how the review loop works, and decide if Kotobado fits the way you study. The CTA flow now lands in one place, so adding a real waitlist endpoint later won’t require reshaping the page again.</p>
     <div class="reveal">
-      <a href="#" class="btn-primary">Become a beta-tester</a>
+      <a href="#top" class="btn-primary">Back to the top</a>
     </div>
   </div>
-</div>
+</section>
 
 <!-- FOOTER -->
 <footer>
   <p class="footer-copy">© 2026 Kotobado. All rights reserved.</p>
   <div class="footer-mark">
-    <svg width="18" height="27" viewBox="0 0 52 78" xmlns="http://www.w3.org/2000/svg">
+    <svg width="18" height="27" viewBox="0 0 52 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
       <rect x="13" y="0" width="26" height="3.6" rx="1.4" fill="#BBBBBB"/>
       <rect x="0" y="12.4" width="52" height="3.6" rx="1.4" fill="#BBBBBB"/>
       <rect x="1.75" y="26.4" width="48.5" height="48.5" rx="3.5" fill="none" stroke="#BBBBBB" stroke-width="3.5"/>
@@ -864,22 +1108,66 @@ footer {
 </footer>
 
 <script>
+// ── MOTION PREFERENCES ──
+const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+let prefersReducedMotion = reducedMotionQuery.matches;
+
+// ── MOBILE NAV ──
+const menuButton = document.querySelector('.nav-menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuLinks = document.querySelectorAll('.nav-mobile-links a');
+
+function setMenuOpen(isOpen) {
+  if (!menuButton || !mobileMenu) return;
+  menuButton.setAttribute('aria-expanded', String(isOpen));
+  menuButton.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  mobileMenu.classList.toggle('is-open', isOpen);
+  document.body.classList.toggle('nav-open', isOpen);
+}
+
+if (menuButton) {
+  menuButton.addEventListener('click', () => {
+    const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+    setMenuOpen(!isOpen);
+  });
+}
+
+mobileMenuLinks.forEach(link => {
+  link.addEventListener('click', () => setMenuOpen(false));
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) setMenuOpen(false);
+});
+
 // ── SCROLL REVEAL ──
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const revealElements = document.querySelectorAll('.reveal');
+
+if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+  revealElements.forEach(el => el.classList.add('visible'));
+} else {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12 });
+
+  revealElements.forEach(el => observer.observe(el));
+}
 
 // ── GALAXY ──
 const canvas = document.getElementById('galaxy-canvas');
 const ctx = canvas.getContext('2d');
-const dpr = Math.min(window.devicePixelRatio || 1, 2);
-const W = 420, H = 380;
-canvas.width = W * dpr; canvas.height = H * dpr;
-canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-ctx.scale(dpr, dpr);
-const cx = W / 2, cy = H / 2 + 8;
-const MAX_R = W * 0.3;
+const galaxyDetailTitle = document.getElementById('galaxy-detail-title');
+const galaxyDetailMeta = document.getElementById('galaxy-detail-meta');
+let W = 420;
+let H = 380;
+let cx = W / 2;
+let cy = H / 2 + 8;
+let MAX_R = W * 0.3;
+let dpr = Math.min(window.devicePixelRatio || 1, 2);
 const CC = {verb:'#1D9E75',noun:'#378ADD',adj:'#D85A30',particle:'#BA7517',grammar:'#7F77DD'};
 
 const cards = [
@@ -896,86 +1184,200 @@ const cards = [
   {k:'に',cat:'particle',s:51,due:14,r:0.83},{k:'の',cat:'particle',s:85,due:45,r:0.98},
 ];
 
-cards.forEach((c,i) => { c.angle = (i/cards.length)*Math.PI*2 + (Math.random()-0.5)*0.5; c._x=0; c._y=0; c._r=0; });
+cards.forEach((card, index) => {
+  card.angle = (index / cards.length) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
+  card._x = 0;
+  card._y = 0;
+  card._r = 0;
+});
 
-function dToR(d) {
-  const inner = W*0.045;
-  if (d<=0) return inner;
-  return inner + MAX_R * Math.log(1+d) / Math.log(1+50);
+function describeDue(days) {
+  if (days <= 0) return 'due now';
+  if (days === 1) return 'due in 1 day';
+  return `due in ${days} days`;
+}
+
+function updateGalaxyDetail(index) {
+  if (index === null || index === undefined) {
+    galaxyDetailTitle.textContent = 'Tap or hover a card to inspect it.';
+    galaxyDetailMeta.textContent = 'Distance shows the due date, size shows stability, and opacity shows current retrievability.';
+    return;
+  }
+
+  const card = cards[index];
+  galaxyDetailTitle.textContent = `${card.k} · ${card.cat}`;
+  galaxyDetailMeta.textContent = `Stability ${card.s}, ${describeDue(card.due)}, retrievability ${Math.round(card.r * 100)}%.`;
+}
+
+function dToR(dueDays) {
+  const inner = W * 0.045;
+  if (dueDays <= 0) return inner;
+  return inner + MAX_R * Math.log(1 + dueDays) / Math.log(1 + 50);
 }
 
 const rings = [{d:0,l:'due'},{d:3,l:'3d'},{d:7,l:'1wk'},{d:14,l:'2wk'},{d:30,l:'1mo'}];
-let rot = 0, hov = null;
+let rot = 0;
+let hov = null;
+let frameId = null;
 
-function draw() {
-  ctx.clearRect(0,0,W,H);
-  rings.forEach(({d,l}) => {
-    const r = dToR(d);
-    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2);
-    ctx.strokeStyle='rgba(26,26,26,0.07)'; ctx.lineWidth=0.5; ctx.stroke();
-    ctx.fillStyle='rgba(26,26,26,0.25)';
-    ctx.font='9px -apple-system,sans-serif'; ctx.textAlign='center';
-    ctx.fillText(l, cx, cy-r-4);
+function drawScene() {
+  ctx.clearRect(0, 0, W, H);
+
+  rings.forEach(({d, l}) => {
+    const radius = dToR(d);
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(26,26,26,0.07)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(26,26,26,0.25)';
+    ctx.font = '9px -apple-system,sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(l, cx, cy - radius - 4);
   });
-  ctx.beginPath(); ctx.arc(cx,cy,2,0,Math.PI*2);
-  ctx.fillStyle='rgba(26,26,26,0.2)'; ctx.fill();
 
-  cards.forEach((card,i) => {
+  ctx.beginPath();
+  ctx.arc(cx, cy, 2, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(26,26,26,0.2)';
+  ctx.fill();
+
+  cards.forEach((card, index) => {
     const orbitR = dToR(card.due);
-    const angle  = card.angle + rot;
-    const x = cx + orbitR*Math.cos(angle);
-    const y = cy + orbitR*Math.sin(angle);
-    const sz = 4 + (card.s/85)*8;
-    const alpha = 0.2 + card.r*0.8;
-    const isDue = card.due<=0;
-    const isHov = hov===i;
-    card._x=x; card._y=y; card._r=sz;
+    const angle = card.angle + rot;
+    const x = cx + orbitR * Math.cos(angle);
+    const y = cy + orbitR * Math.sin(angle);
+    const size = 4 + (card.s / 85) * 8;
+    const alpha = 0.2 + card.r * 0.8;
+    const isDue = card.due <= 0;
+    const isHovered = hov === index;
+    const color = CC[card.cat];
 
-    let ds = sz;
-    if (isDue) ds = sz*(1+0.1*Math.sin(Date.now()*0.003+i));
-    if (isHov) ds = sz*1.4;
+    card._x = x;
+    card._y = y;
+    card._r = size;
 
-    ctx.globalAlpha = isHov ? 1 : alpha;
-    const col = CC[card.cat];
+    let displaySize = size;
+    if (isDue && !prefersReducedMotion) displaySize = size * (1 + 0.1 * Math.sin(Date.now() * 0.003 + index));
+    if (isHovered) displaySize = size * 1.4;
 
-    if (isDue&&!isHov) {
-      ctx.beginPath(); ctx.arc(x,y,ds+3.5,0,Math.PI*2);
-      ctx.strokeStyle=col; ctx.lineWidth=0.8;
-      ctx.globalAlpha=0.3+0.25*Math.sin(Date.now()*0.003+i); ctx.stroke();
-      ctx.globalAlpha=alpha;
+    ctx.globalAlpha = isHovered ? 1 : alpha;
+
+    if (isDue && !isHovered && !prefersReducedMotion) {
+      ctx.beginPath();
+      ctx.arc(x, y, displaySize + 3.5, 0, Math.PI * 2);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 0.8;
+      ctx.globalAlpha = 0.3 + 0.25 * Math.sin(Date.now() * 0.003 + index);
+      ctx.stroke();
+      ctx.globalAlpha = alpha;
     }
-    if (isHov) {
-      ctx.beginPath(); ctx.arc(x,y,ds+5,0,Math.PI*2);
-      ctx.strokeStyle=col; ctx.lineWidth=1; ctx.globalAlpha=0.5; ctx.stroke();
-      ctx.globalAlpha=1;
+
+    if (isHovered) {
+      ctx.beginPath();
+      ctx.arc(x, y, displaySize + 5, 0, Math.PI * 2);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = 0.5;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
     }
 
-    ctx.beginPath(); ctx.arc(x,y,ds,0,Math.PI*2);
-    ctx.fillStyle=col; ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x, y, displaySize, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
 
-    const fs=Math.max(9,Math.round(ds*1.2));
-    ctx.font=fs+'px serif'; ctx.fillStyle='rgba(255,255,255,0.92)';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.globalAlpha=isHov?1:Math.min(1,alpha+0.1);
-    ctx.fillText(card.k,x,y);
-    ctx.globalAlpha=1;
+    const fontSize = Math.max(9, Math.round(displaySize * 1.2));
+    ctx.font = fontSize + 'px serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.92)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.globalAlpha = isHovered ? 1 : Math.min(1, alpha + 0.1);
+    ctx.fillText(card.k, x, y);
+    ctx.globalAlpha = 1;
   });
-
-  rot += 0.00055;
-  requestAnimationFrame(draw);
 }
 
-canvas.addEventListener('mousemove', e => {
-  const rect=canvas.getBoundingClientRect();
-  const mx=e.clientX-rect.left, my=e.clientY-rect.top;
-  let found=null, best=18;
-  cards.forEach((c,i)=>{ const d=Math.hypot(mx-c._x,my-c._y); if(d<c._r+9&&d<best){best=d;found=i;}});
-  hov=found;
-  canvas.style.cursor=found!==null?'pointer':'default';
-});
-canvas.addEventListener('mouseleave',()=>{hov=null;});
+function draw() {
+  drawScene();
+  if (prefersReducedMotion) return;
+  rot += 0.00055;
+  frameId = requestAnimationFrame(draw);
+}
 
-draw();
+function syncGalaxyAnimation() {
+  if (frameId) cancelAnimationFrame(frameId);
+  frameId = null;
+  draw();
+}
+
+function resizeCanvas() {
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const containerWidth = canvas.parentElement.clientWidth - 24;
+  W = Math.max(260, Math.min(420, containerWidth));
+  H = Math.round(W * (380 / 420));
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  cx = W / 2;
+  cy = H / 2 + 8;
+  MAX_R = W * 0.3;
+  syncGalaxyAnimation();
+}
+
+function pickCard(clientX, clientY) {
+  const rect = canvas.getBoundingClientRect();
+  const mx = clientX - rect.left;
+  const my = clientY - rect.top;
+  let found = null;
+  let best = 18;
+
+  cards.forEach((card, index) => {
+    const distance = Math.hypot(mx - card._x, my - card._y);
+    if (distance < card._r + 9 && distance < best) {
+      best = distance;
+      found = index;
+    }
+  });
+
+  hov = found;
+  updateGalaxyDetail(found);
+  canvas.style.cursor = found !== null ? 'pointer' : 'default';
+  if (prefersReducedMotion) drawScene();
+}
+
+canvas.addEventListener('pointermove', event => {
+  pickCard(event.clientX, event.clientY);
+});
+
+canvas.addEventListener('pointerdown', event => {
+  pickCard(event.clientX, event.clientY);
+});
+
+canvas.addEventListener('pointerleave', () => {
+  hov = null;
+  updateGalaxyDetail(null);
+  canvas.style.cursor = 'default';
+  if (prefersReducedMotion) drawScene();
+});
+
+const handleReducedMotionChange = event => {
+  prefersReducedMotion = event.matches;
+  syncGalaxyAnimation();
+};
+
+if (typeof reducedMotionQuery.addEventListener === 'function') {
+  reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
+} else if (typeof reducedMotionQuery.addListener === 'function') {
+  reducedMotionQuery.addListener(handleReducedMotionChange);
+}
+
+window.addEventListener('resize', resizeCanvas);
+
+updateGalaxyDetail(null);
+resizeCanvas();
 </script>
 </body>
 </html>
