@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kotobado — The way of words</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:    #1A1A1A;
+  --ink-2:  #555555;
+  --ink-3:  #999999;
+  --paper:  #F7F6F3;
+  --white:  #FFFFFF;
+  --accent: #4f46e5;
+  --border: rgba(26,26,26,0.10);
+  --border-2: rgba(26,26,26,0.06);
+  --r: 16px;
+  --r-sm: 10px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+  height: 60px;
+  background: rgba(247,246,243,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border);
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; color: var(--ink);
+}
+.nav-wordmark {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+}
+.nav-links {
+  display: flex; align-items: center; gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-2);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  font-size: 14px; font-weight: 500;
+  padding: 8px 20px;
+  background: var(--ink);
+  color: var(--white) !important;
+  border-radius: 100px;
+  transition: opacity 0.2s !important;
+}
+.nav-cta:hover { opacity: 0.75 !important; color: var(--white) !important; }
+
+/* ── SECTIONS ── */
+section { padding: 120px 32px; max-width: 1080px; margin: 0 auto; }
+section.full { max-width: none; padding-left: 0; padding-right: 0; }
+
+/* ── HERO ── */
+.hero {
+  padding-top: 180px;
+  padding-bottom: 120px;
+  text-align: center;
+}
+.hero-kana {
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(52px, 7vw, 88px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 28px;
+  max-width: 780px;
+  margin-left: auto; margin-right: auto;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--ink-2);
+}
+.hero-sub {
+  font-size: 19px;
+  color: var(--ink-2);
+  font-weight: 300;
+  max-width: 520px;
+  margin: 0 auto 48px;
+  line-height: 1.65;
+}
+.hero-actions {
+  display: flex; align-items: center; gap: 16px; justify-content: center;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 32px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 100px;
+  font-size: 15px; font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.75; }
+.btn-ghost {
+  display: inline-flex; align-items: center;
+  font-size: 15px; font-weight: 400;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ── HERO CARD DEMO ── */
+.hero-demo {
+  margin-top: 80px;
+  display: flex; justify-content: center;
+}
+.demo-card {
+  background: var(--white);
+  border-radius: 22px;
+  border: 0.5px solid var(--border);
+  padding: 48px 56px 40px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+.demo-card-badge {
+  display: inline-flex;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  background: rgba(79,70,229,0.08);
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+.demo-kanji {
+  font-size: 88px;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 8px;
+  font-weight: 300;
+}
+.demo-hint {
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+  margin-bottom: 32px;
+}
+.demo-conf-row {
+  display: flex; gap: 8px;
+}
+.demo-conf-btn {
+  flex: 1; padding: 10px 6px;
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink-2);
+  font-size: 12px; font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.demo-conf-btn:hover { background: var(--white); color: var(--ink); }
+.demo-ring {
+  position: absolute; inset: -2px; border-radius: 24px;
+  border: 2px solid rgba(34,197,94,0.25);
+  pointer-events: none;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 0.5px; background: var(--border);
+  max-width: 1080px; margin: 0 auto;
+}
+
+/* ── LABEL ── */
+.section-label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* ── COMPARISON SECTION ── */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-top: 56px;
+}
+.comp-cell {
+  background: var(--white);
+  padding: 40px 32px;
+}
+.comp-cell.highlight { background: var(--ink); }
+.comp-app {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 16px;
+}
+.comp-cell.highlight .comp-app { color: rgba(255,255,255,0.45); }
+.comp-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.comp-cell.highlight .comp-title { color: var(--white); }
+.comp-body {
+  font-size: 14px; line-height: 1.7;
+  color: var(--ink-2);
+}
+.comp-cell.highlight .comp-body { color: rgba(255,255,255,0.6); }
+.comp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+.comp-tag {
+  font-size: 11px; padding: 4px 10px;
+  border-radius: 100px;
+  border: 0.5px solid var(--border);
+  color: var(--ink-3);
+}
+.comp-cell.highlight .comp-tag {
+  border-color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.45);
+}
+.comp-tag.good {
+  border-color: rgba(34,197,94,0.3);
+  color: #166534;
+  background: rgba(34,197,94,0.08);
+}
+
+/* ── FSRS SECTION ── */
+.fsrs-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 56px;
+}
+.fsrs-text h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.fsrs-text p {
+  font-size: 16px; color: var(--ink-2);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+.fsrs-stat-row {
+  display: flex; gap: 32px; margin-top: 32px;
+}
+.fsrs-stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 42px; line-height: 1;
+  color: var(--ink);
+}
+.fsrs-stat-label {
+  font-size: 13px; color: var(--ink-3);
+  margin-top: 4px; line-height: 1.4;
+}
+.fsrs-visual {
+  background: var(--white);
+  border-radius: var(--r);
+  border: 0.5px solid var(--border);
+  padding: 32px;
+}
+.fsrs-var-row {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 0;
+  border-bottom: 0.5px solid var(--border-2);
+}
+.fsrs-var-row:last-child { border-bottom: none; }
+.fsrs-var-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.fsrs-var-name {
+  font-size: 14px; font-weight: 500; color: var(--ink);
+  width: 110px; flex-shrink: 0;
+}
+.fsrs-var-desc { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+.fsrs-bar-wrap {
+  margin-left: auto; width: 80px; flex-shrink: 0;
+  height: 4px; background: var(--border);
+  border-radius: 2px; overflow: hidden;
+}
+.fsrs-bar { height: 100%; border-radius: 2px; }
+
+/* ── NEUROSCIENCE SECTION ── */
+.neuro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-top: 56px;
+}
+.neuro-cell {
+  background: var(--paper);
+  padding: 36px 28px;
+}
+.neuro-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px; color: var(--ink);
+  margin-bottom: 12px; line-height: 1;
+}
+.neuro-title {
+  font-size: 15px; font-weight: 500;
+  color: var(--ink); margin-bottom: 10px;
+}
+.neuro-body {
+  font-size: 13px; color: var(--ink-2);
+  line-height: 1.7;
+}
+.neuro-source {
+  font-size: 11px; color: var(--ink-3);
+  margin-top: 12px; font-style: italic;
+}
+
+/* ── FEATURES ── */
+.features-header {
+  max-width: 560px; margin-bottom: 64px;
+}
+.features-header h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1; letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.features-header p {
+  font-size: 16px; color: var(--ink-2); line-height: 1.7;
+}
+.features-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+.feature-item {
+  background: var(--white);
+  padding: 36px 32px;
+}
+.feature-item.dark { background: var(--ink); }
+.feature-icon {
+  width: 36px; height: 36px;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+.feature-item.dark .feature-icon { color: rgba(255,255,255,0.6); }
+.feature-title {
+  font-size: 16px; font-weight: 500;
+  color: var(--ink); margin-bottom: 10px;
+}
+.feature-item.dark .feature-title { color: var(--white); }
+.feature-body {
+  font-size: 14px; color: var(--ink-2); line-height: 1.7;
+}
+.feature-item.dark .feature-body { color: rgba(255,255,255,0.5); }
+
+/* ── GALAXY SECTION ── */
+.galaxy-section {
+  padding: 120px 32px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.galaxy-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 56px;
+}
+.galaxy-text h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 4vw, 44px);
+  line-height: 1.15; letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.galaxy-text p {
+  font-size: 16px; color: var(--ink-2);
+  line-height: 1.75; margin-bottom: 14px;
+}
+.galaxy-legend {
+  display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px;
+}
+.g-leg { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-3); }
+.g-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+#galaxy-canvas {
+  border-radius: var(--r);
+  display: block;
+  background: #F0EFE9;
+}
+
+/* ── HOW IT WORKS ── */
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-top: 56px;
+  counter-reset: steps;
+}
+.how-step {
+  background: var(--paper);
+  padding: 36px 28px;
+  counter-increment: steps;
+}
+.how-step-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 13px; color: var(--ink-3);
+  margin-bottom: 16px; letter-spacing: 0.04em;
+}
+.how-step-title {
+  font-size: 15px; font-weight: 500;
+  color: var(--ink); margin-bottom: 10px;
+}
+.how-step-body {
+  font-size: 13px; color: var(--ink-2); line-height: 1.7;
+}
+
+/* ── CTA ── */
+.cta-section {
+  text-align: center;
+  padding: 120px 32px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.cta-section h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(36px, 5vw, 60px);
+  line-height: 1.1; letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.cta-section p {
+  font-size: 17px; color: var(--ink-2);
+  margin-bottom: 40px; line-height: 1.65;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 0.5px solid var(--border);
+  padding: 40px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1080px; margin: 0 auto;
+}
+.footer-copy { font-size: 13px; color: var(--ink-3); }
+.footer-mark { display: flex; align-items: center; gap: 10px; }
+.footer-wordmark { font-size: 13px; font-weight: 300; letter-spacing: 0.16em; color: var(--ink-3); }
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  section { padding: 80px 20px; }
+  .comparison-grid, .neuro-grid { grid-template-columns: 1fr; }
+  .fsrs-layout, .galaxy-layout { grid-template-columns: 1fr; gap: 40px; }
+  .features-list { grid-template-columns: 1fr; }
+  .how-steps { grid-template-columns: 1fr 1fr; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+  .hero h1 { font-size: 44px; }
+  .demo-card { padding: 36px 28px 28px; }
+  .demo-kanji { font-size: 72px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg width="28" height="42" viewBox="0 0 52 78" xmlns="http://www.w3.org/2000/svg">
+      <rect x="13" y="0" width="26" height="3.6" rx="1.4" fill="#1A1A1A"/>
+      <rect x="0" y="12.4" width="52" height="3.6" rx="1.4" fill="#1A1A1A"/>
+      <rect x="1.75" y="26.4" width="48.5" height="48.5" rx="3.5" fill="none" stroke="#1A1A1A" stroke-width="3.5"/>
+    </svg>
+    <span class="nav-wordmark">kotobado</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#science">The science</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#" class="nav-cta">Try it free</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-kana reveal">言葉道 · the way of words</p>
+  <h1 class="reveal reveal-delay-1">
+    Japanese vocabulary<br>that <em>actually stays</em> with you
+  </h1>
+  <p class="hero-sub reveal reveal-delay-2">
+    A spaced repetition app built on neuroscience, not habit.
+    Every review is engineered to create a stronger memory trace.
+  </p>
+  <div class="hero-actions reveal reveal-delay-3">
+    <a href="#" class="btn-primary">Start learning free</a>
+    <a href="#science" class="btn-ghost">See the science ↓</a>
+  </div>
+
+  <div class="hero-demo reveal reveal-delay-3">
+    <div class="demo-card">
+      <div class="demo-ring"></div>
+      <div class="demo-card-badge">Kanji recall</div>
+      <div class="demo-kanji">語</div>
+      <p class="demo-hint">what is the reading and meaning?</p>
+      <div class="demo-conf-row">
+        <button class="demo-conf-btn">No clue</button>
+        <button class="demo-conf-btn">Vague idea</button>
+        <button class="demo-conf-btn">I know it</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARISON -->
+<section id="comparison">
+  <p class="section-label reveal">How we're different</p>
+  <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-0.02em;max-width:560px;">
+    Built on the shoulders of giants
+  </h2>
+  <p class="reveal" style="font-size:16px;color:var(--ink-2);max-width:500px;margin-top:16px;line-height:1.75;">
+    Anki and WaniKani are excellent tools that have helped millions of learners. Kotobado takes what works in both and goes further.
+  </p>
+
+  <div class="comparison-grid reveal">
+    <div class="comp-cell">
+      <p class="comp-app">Anki</p>
+      <p class="comp-title">Maximum flexibility</p>
+      <p class="comp-body">Anki's open card system and large community are unmatched. The SM-2 scheduling algorithm works. But it asks you to build everything yourself — decks, mnemonics, review strategy.</p>
+      <div class="comp-tags">
+        <span class="comp-tag">Great flexibility</span>
+        <span class="comp-tag">SM-2 scheduling</span>
+        <span class="comp-tag">Manual setup</span>
+      </div>
+    </div>
+    <div class="comp-cell">
+      <p class="comp-app">WaniKani</p>
+      <p class="comp-title">Structured and guided</p>
+      <p class="comp-body">WaniKani's radical-first system and curated mnemonics are genuinely brilliant for kanji. But the fixed progression locks you in, and the algorithm hasn't changed in years.</p>
+      <div class="comp-tags">
+        <span class="comp-tag">Great structure</span>
+        <span class="comp-tag">Radical system</span>
+        <span class="comp-tag">Fixed path</span>
+      </div>
+    </div>
+    <div class="comp-cell highlight">
+      <p class="comp-app">Kotobado</p>
+      <p class="comp-title">Neuroscience-informed</p>
+      <p class="comp-body">Kotobado combines curated content and radical mnemonics with the FSRS v5 algorithm and a two-step review flow that forces genuine retrieval, not recognition.</p>
+      <div class="comp-tags">
+        <span class="comp-tag good">FSRS v5 algorithm</span>
+        <span class="comp-tag good">Two-step review</span>
+        <span class="comp-tag good">Calibration tracking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FSRS ALGORITHM -->
+<section id="science">
+  <p class="section-label reveal">The algorithm</p>
+  <div class="fsrs-layout">
+    <div class="fsrs-text">
+      <h2 class="reveal">
+        FSRS v5 — the most accurate open scheduling algorithm
+      </h2>
+      <p class="reveal">
+        Traditional SRS apps like Anki's default scheduler use SM-2, a formula from 1987. It works, but it treats all learners identically and uses a fixed forgetting curve.
+      </p>
+      <p class="reveal">
+        FSRS (Free Spaced Repetition Scheduler) was developed in 2022 using machine learning on millions of real reviews. It models three variables per card — stability, difficulty, and retrievability — and shows each card precisely when your recall probability drops to your target threshold.
+      </p>
+      <p class="reveal" style="font-size:14px;color:var(--ink-3);">
+        Peer-reviewed at ACM KDD. Used by Anki, RemNote, and now Kotobado.
+      </p>
+      <div class="fsrs-stat-row reveal">
+        <div>
+          <div class="fsrs-stat-num">20–30%</div>
+          <div class="fsrs-stat-label">fewer reviews<br>for same retention</div>
+        </div>
+        <div>
+          <div class="fsrs-stat-num">v5</div>
+          <div class="fsrs-stat-label">latest version<br>with 19 parameters</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fsrs-visual reveal">
+      <p style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:20px;">Three variables per card</p>
+      <div class="fsrs-var-row">
+        <div class="fsrs-var-dot" style="background:#4f46e5;"></div>
+        <div class="fsrs-var-name">Stability</div>
+        <div class="fsrs-var-desc">How long until you forget it. Grows with every successful recall.</div>
+        <div class="fsrs-bar-wrap"><div class="fsrs-bar" style="width:75%;background:#4f46e5;"></div></div>
+      </div>
+      <div class="fsrs-var-row">
+        <div class="fsrs-var-dot" style="background:#d85a30;"></div>
+        <div class="fsrs-var-name">Difficulty</div>
+        <div class="fsrs-var-desc">Intrinsic hardness of the card. Learned from your own review history.</div>
+        <div class="fsrs-bar-wrap"><div class="fsrs-bar" style="width:45%;background:#d85a30;"></div></div>
+      </div>
+      <div class="fsrs-var-row">
+        <div class="fsrs-var-dot" style="background:#1d9e75;"></div>
+        <div class="fsrs-var-name">Retrievability</div>
+        <div class="fsrs-var-desc">Your current recall probability. Decays continuously between reviews.</div>
+        <div class="fsrs-bar-wrap"><div class="fsrs-bar" style="width:88%;background:#1d9e75;"></div></div>
+      </div>
+      <div style="margin-top:24px;padding:14px 16px;background:var(--paper);border-radius:var(--r-sm);">
+        <p style="font-size:12px;color:var(--ink-2);line-height:1.6;">
+          Kotobado also adjusts scheduling based on your pre-flip confidence rating — a second signal that catches overconfidence, the most common cause of SRS failure.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NEUROSCIENCE -->
+<section>
+  <p class="section-label reveal">The neuroscience</p>
+  <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-0.02em;max-width:600px;">
+    Features designed around how memory actually works
+  </h2>
+
+  <div class="neuro-grid reveal">
+    <div class="neuro-cell">
+      <div class="neuro-num">01</div>
+      <p class="neuro-title">Pre-flip confidence rating</p>
+      <p class="neuro-body">Before seeing the answer, you rate your confidence. This forces genuine retrieval rather than recognition — a fundamentally different and stronger memory process. It also trains metacognition: over time, you learn when you actually know something versus when you only think you do.</p>
+      <p class="neuro-source">Kornell, Hays & Bjork, 2009 — testing effect research</p>
+    </div>
+    <div class="neuro-cell">
+      <div class="neuro-num">02</div>
+      <p class="neuro-title">Interleaved front-face rotation</p>
+      <p class="neuro-body">Each card is shown from a randomly chosen field — kanji, kana, sentence, or radicals. The same word enters your memory through different angles, encoding it across multiple neural pathways. You won't recognise a word in conversation but fail to produce it.</p>
+      <p class="neuro-source">Taylor & Rohrer, 2010 — interleaved practice</p>
+    </div>
+    <div class="neuro-cell">
+      <div class="neuro-num">03</div>
+      <p class="neuro-title">Reconsolidation booster</p>
+      <p class="neuro-body">Every time you correctly recall a card, its memory trace becomes briefly unstable for ~45 minutes — a window where a second encoding is disproportionately strengthening. Kotobado surfaces these cards again in that window as a dedicated booster queue.</p>
+      <p class="neuro-source">Nader et al., 2000 — memory reconsolidation</p>
+    </div>
+    <div class="neuro-cell">
+      <div class="neuro-num">04</div>
+      <p class="neuro-title">Production typing mode</p>
+      <p class="neuro-body">Once a card is established (5+ reviews), Kotobado occasionally asks you to type the reading rather than choose it. Generating an answer is harder than recognising one and creates a stronger memory trace. The generation effect is one of the most replicated findings in memory research.</p>
+      <p class="neuro-source">Slamecka & Graf, 1978 — generation effect</p>
+    </div>
+    <div class="neuro-cell">
+      <div class="neuro-num">05</div>
+      <p class="neuro-title">Overconfidence penalty</p>
+      <p class="neuro-body">When you say "I know it" but then fail — the most dangerous failure mode in SRS — Kotobado penalises stability more aggressively than a standard failure. Standard Anki never catches this. The hypercorrection effect shows these surprises encode corrections most deeply.</p>
+      <p class="neuro-source">Butterfield & Metcalfe, 2001 — hypercorrection effect</p>
+    </div>
+    <div class="neuro-cell">
+      <div class="neuro-num">06</div>
+      <p class="neuro-title">Contextual example sentences</p>
+      <p class="neuro-body">Every card includes a real example sentence as a dedicated review field. Memory research consistently shows that words encoded in grammatical context — activating the hippocampus alongside surrounding meaning — are retained significantly longer than isolated symbols.</p>
+      <p class="neuro-source">Godden & Baddeley, 1975 — context-dependent memory</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="features-header">
+    <p class="section-label reveal">Features</p>
+    <h2 class="reveal">Everything you need.<br>Nothing you don't.</h2>
+    <p class="reveal">A focused set of tools built around the review loop. No gamification noise. No streaks punishing you for missing a day.</p>
+  </div>
+
+  <div class="features-list reveal">
+    <div class="feature-item">
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p class="feature-title">Four-field cards</p>
+      <p class="feature-body">Every card carries kanji, kana + romaji, an example sentence + romaji, and radicals + mnemonic. The app chooses which field to show as the question, hiding the others until you flip.</p>
+    </div>
+    <div class="feature-item dark">
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3" stroke-linecap="round"/>
+      </svg>
+      <p class="feature-title">Calibration scatter plot</p>
+      <p class="feature-body">After 50 reviews, a personal fingerprint appears — a scatter plot of your confidence against your actual recall. Dots below the diagonal are your overconfident failures. It changes as you improve.</p>
+    </div>
+    <div class="feature-item">
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 3v1m0 16v1M3 12h1m16 0h1M5.636 5.636l.707.707m11.314 11.314l.707.707M5.636 18.364l.707-.707m11.314-11.314l.707-.707" stroke-linecap="round"/>
+      </svg>
+      <p class="feature-title">Flow state ring</p>
+      <p class="feature-body">A 2-pixel border around the session container shifts from green (optimal 80–95% accuracy) to blue (too easy) to amber (too hard). It exists in your peripheral vision, never demanding attention.</p>
+    </div>
+    <div class="feature-item">
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M7 16V4m0 0L3 8m4-4l4 4m6 4v8m0 0l-4-4m4 4l4-4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p class="feature-title">CSV import</p>
+      <p class="feature-body">Load your own card deck from a CSV file directly from your phone. Bring any word list — your textbook vocabulary, a JLPT frequency list, anything. Cards work offline immediately after import.</p>
+    </div>
+    <div class="feature-item">
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" stroke-linecap="round"/>
+      </svg>
+      <p class="feature-title">Offline-first</p>
+      <p class="feature-body">Review cards on the train, in class, anywhere with no signal. Everything runs on-device. Ratings sync silently when you reconnect. Nothing requires a server to study.</p>
+    </div>
+    <div class="feature-item dark">
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" stroke-linecap="round"/>
+      </svg>
+      <p class="feature-title">Review frequency control</p>
+      <p class="feature-body">Adjust the target retention threshold — Relaxed (80%), Balanced (90%), or Intensive (95%). One setting changes all intervals globally. Study at your own pace without touching any FSRS parameters.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GALAXY -->
+<section class="galaxy-section">
+  <p class="section-label reveal">Knowledge galaxy</p>
+  <div class="galaxy-layout">
+    <div class="galaxy-text">
+      <h2 class="reveal">Your deck as a living system</h2>
+      <p class="reveal">Every card orbits a center point. Distance from center = days until due. Size = stability. Opacity = current retrievability — how likely you are to recall it right now.</p>
+      <p class="reveal">Cards drift inward as memory fades. Due cards pulse. Mature memories sit in the outer rings, large and bright. A struggling card is small, faint, and close to the center.</p>
+      <p class="reveal" style="font-size:14px;color:var(--ink-3);">Hover a card to inspect its exact stability, retrievability, and next due date.</p>
+      <div class="galaxy-legend reveal">
+        <div class="g-leg"><div class="g-dot" style="background:#1D9E75;"></div>verbs</div>
+        <div class="g-leg"><div class="g-dot" style="background:#378ADD;"></div>nouns</div>
+        <div class="g-leg"><div class="g-dot" style="background:#D85A30;"></div>adjectives</div>
+        <div class="g-leg"><div class="g-dot" style="background:#BA7517;"></div>particles</div>
+        <div class="g-leg"><div class="g-dot" style="background:#7F77DD;"></div>grammar</div>
+      </div>
+    </div>
+    <canvas id="galaxy-canvas" width="420" height="380"></canvas>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <p class="section-label reveal">How it works</p>
+  <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-0.02em;max-width:560px;">
+    One review loop, engineered for depth
+  </h2>
+
+  <div class="how-steps reveal">
+    <div class="how-step">
+      <p class="how-step-num">01</p>
+      <p class="how-step-title">Card appears</p>
+      <p class="how-step-body">The app randomly selects which of the four fields to show as the question. The others stay hidden. You can't predict which angle you'll be tested from.</p>
+    </div>
+    <div class="how-step">
+      <p class="how-step-num">02</p>
+      <p class="how-step-title">Rate your confidence</p>
+      <p class="how-step-body">Before seeing the answer — No clue, Vague idea, or I know it. This forced attempt is the retrieval. The rating alone changes how the memory is encoded.</p>
+    </div>
+    <div class="how-step">
+      <p class="how-step-num">03</p>
+      <p class="how-step-title">Flip and see all fields</p>
+      <p class="how-step-body">The full card reveals — kanji, kana, romaji, example sentence with romaji, radicals, and mnemonic. Everything at once, in context.</p>
+    </div>
+    <div class="how-step">
+      <p class="how-step-num">04</p>
+      <p class="how-step-title">Rate your actual recall</p>
+      <p class="how-step-body">Blackout, Hard, Good, or Perfect. FSRS uses both ratings together to compute the next interval. If your confidence and recall don't match, the algorithm notices.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<div style="max-width:1080px;margin:0 auto;">
+  <div class="cta-section">
+    <h2 class="reveal">Start the way of words</h2>
+    <p class="reveal">Free to use. No account needed to begin. Your first session takes two minutes to set up.</p>
+    <div class="reveal">
+      <a href="#" class="btn-primary">Open Kotobado free</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy">© 2026 Kotobado. All rights reserved.</p>
+  <div class="footer-mark">
+    <svg width="18" height="27" viewBox="0 0 52 78" xmlns="http://www.w3.org/2000/svg">
+      <rect x="13" y="0" width="26" height="3.6" rx="1.4" fill="#BBBBBB"/>
+      <rect x="0" y="12.4" width="52" height="3.6" rx="1.4" fill="#BBBBBB"/>
+      <rect x="1.75" y="26.4" width="48.5" height="48.5" rx="3.5" fill="none" stroke="#BBBBBB" stroke-width="3.5"/>
+    </svg>
+    <span class="footer-wordmark">kotobado</span>
+  </div>
+</footer>
+
+<script>
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── GALAXY ──
+const canvas = document.getElementById('galaxy-canvas');
+const ctx = canvas.getContext('2d');
+const dpr = Math.min(window.devicePixelRatio || 1, 2);
+const W = 420, H = 380;
+canvas.width = W * dpr; canvas.height = H * dpr;
+canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+ctx.scale(dpr, dpr);
+const cx = W / 2, cy = H / 2 + 8;
+const MAX_R = W * 0.3;
+const CC = {verb:'#1D9E75',noun:'#378ADD',adj:'#D85A30',particle:'#BA7517',grammar:'#7F77DD'};
+
+const cards = [
+  {k:'学',cat:'verb',s:45,due:12,r:0.78},{k:'語',cat:'noun',s:32,due:3,r:0.62},
+  {k:'日',cat:'noun',s:67,due:21,r:0.91},{k:'書',cat:'verb',s:18,due:1,r:0.51},
+  {k:'読',cat:'verb',s:28,due:0,r:0.43},{k:'話',cat:'verb',s:55,due:8,r:0.82},
+  {k:'聞',cat:'verb',s:12,due:0,r:0.31},{k:'食',cat:'verb',s:38,due:5,r:0.74},
+  {k:'飲',cat:'verb',s:22,due:2,r:0.58},{k:'見',cat:'verb',s:61,due:18,r:0.88},
+  {k:'行',cat:'verb',s:74,due:30,r:0.95},{k:'来',cat:'verb',s:29,due:4,r:0.68},
+  {k:'人',cat:'noun',s:80,due:38,r:0.97},{k:'時',cat:'noun',s:41,due:9,r:0.76},
+  {k:'水',cat:'noun',s:53,due:15,r:0.85},{k:'山',cat:'noun',s:66,due:22,r:0.91},
+  {k:'大',cat:'adj',s:48,due:11,r:0.79},{k:'新',cat:'adj',s:20,due:1,r:0.49},
+  {k:'は',cat:'particle',s:72,due:28,r:0.93},{k:'を',cat:'particle',s:68,due:25,r:0.92},
+  {k:'に',cat:'particle',s:51,due:14,r:0.83},{k:'の',cat:'particle',s:85,due:45,r:0.98},
+];
+
+cards.forEach((c,i) => { c.angle = (i/cards.length)*Math.PI*2 + (Math.random()-0.5)*0.5; c._x=0; c._y=0; c._r=0; });
+
+function dToR(d) {
+  const inner = W*0.045;
+  if (d<=0) return inner;
+  return inner + MAX_R * Math.log(1+d) / Math.log(1+50);
+}
+
+const rings = [{d:0,l:'due'},{d:3,l:'3d'},{d:7,l:'1wk'},{d:14,l:'2wk'},{d:30,l:'1mo'}];
+let rot = 0, hov = null;
+
+function draw() {
+  ctx.clearRect(0,0,W,H);
+  rings.forEach(({d,l}) => {
+    const r = dToR(d);
+    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.strokeStyle='rgba(26,26,26,0.07)'; ctx.lineWidth=0.5; ctx.stroke();
+    ctx.fillStyle='rgba(26,26,26,0.25)';
+    ctx.font='9px -apple-system,sans-serif'; ctx.textAlign='center';
+    ctx.fillText(l, cx, cy-r-4);
+  });
+  ctx.beginPath(); ctx.arc(cx,cy,2,0,Math.PI*2);
+  ctx.fillStyle='rgba(26,26,26,0.2)'; ctx.fill();
+
+  cards.forEach((card,i) => {
+    const orbitR = dToR(card.due);
+    const angle  = card.angle + rot;
+    const x = cx + orbitR*Math.cos(angle);
+    const y = cy + orbitR*Math.sin(angle);
+    const sz = 4 + (card.s/85)*8;
+    const alpha = 0.2 + card.r*0.8;
+    const isDue = card.due<=0;
+    const isHov = hov===i;
+    card._x=x; card._y=y; card._r=sz;
+
+    let ds = sz;
+    if (isDue) ds = sz*(1+0.1*Math.sin(Date.now()*0.003+i));
+    if (isHov) ds = sz*1.4;
+
+    ctx.globalAlpha = isHov ? 1 : alpha;
+    const col = CC[card.cat];
+
+    if (isDue&&!isHov) {
+      ctx.beginPath(); ctx.arc(x,y,ds+3.5,0,Math.PI*2);
+      ctx.strokeStyle=col; ctx.lineWidth=0.8;
+      ctx.globalAlpha=0.3+0.25*Math.sin(Date.now()*0.003+i); ctx.stroke();
+      ctx.globalAlpha=alpha;
+    }
+    if (isHov) {
+      ctx.beginPath(); ctx.arc(x,y,ds+5,0,Math.PI*2);
+      ctx.strokeStyle=col; ctx.lineWidth=1; ctx.globalAlpha=0.5; ctx.stroke();
+      ctx.globalAlpha=1;
+    }
+
+    ctx.beginPath(); ctx.arc(x,y,ds,0,Math.PI*2);
+    ctx.fillStyle=col; ctx.fill();
+
+    const fs=Math.max(9,Math.round(ds*1.2));
+    ctx.font=fs+'px serif'; ctx.fillStyle='rgba(255,255,255,0.92)';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.globalAlpha=isHov?1:Math.min(1,alpha+0.1);
+    ctx.fillText(card.k,x,y);
+    ctx.globalAlpha=1;
+  });
+
+  rot += 0.00055;
+  requestAnimationFrame(draw);
+}
+
+canvas.addEventListener('mousemove', e => {
+  const rect=canvas.getBoundingClientRect();
+  const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+  let found=null, best=18;
+  cards.forEach((c,i)=>{ const d=Math.hypot(mx-c._x,my-c._y); if(d<c._r+9&&d<best){best=d;found=i;}});
+  hov=found;
+  canvas.style.cursor=found!==null?'pointer':'default';
+});
+canvas.addEventListener('mouseleave',()=>{hov=null;});
+
+draw();
+</script>
+</body>
+</html>
