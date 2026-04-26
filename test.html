@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placement Test — Kotobado</title>
+<meta name="description" content="Find out where to start in Kotobado. A 3-minute vocabulary placement test — no account required.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Kotobado">
+<meta name="theme-color" content="#F7F6F3">
+<link rel="canonical" href="https://kotobado.com/test.html">
+<meta property="og:title" content="Placement Test — Kotobado">
+<meta property="og:description" content="Find out where to start in Kotobado. A 3-minute vocabulary placement test.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kotobado.com/test.html">
+<meta property="og:site_name" content="Kotobado">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Placement Test — Kotobado">
+<meta name="twitter:description" content="Find out where to start. A 3-minute vocabulary placement test.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:    #1A1A1A;
+  --ink-2:  #555555;
+  --ink-3:  #999999;
+  --paper:  #F7F6F3;
+  --white:  #FFFFFF;
+  --accent: #4f46e5;
+  --border: rgba(26,26,26,0.10);
+  --border-2: rgba(26,26,26,0.06);
+  --r: 16px;
+  --r-sm: 10px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.nav-open { overflow: hidden; }
+
+/* ── NAV (identical to site) ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+  height: 60px;
+  background: rgba(247,246,243,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; color: var(--ink);
+}
+.nav-wordmark {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 17px;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+}
+.nav-links {
+  display: flex; align-items: center; gap: 32px;
+  list-style: none;
+}
+.nav-links li { display: flex; align-items: center; }
+.nav-links a {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink-2);
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  font-size: 14px; font-weight: 500;
+  padding: 8px 20px;
+  background: var(--ink);
+  color: var(--white) !important;
+  border-radius: 100px;
+  transition: opacity 0.2s !important;
+  text-decoration: none;
+}
+.nav-cta:hover { opacity: 0.75 !important; }
+.nav-menu-toggle {
+  display: none;
+  width: 42px; height: 42px;
+  border: 0.5px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.72);
+  color: var(--ink);
+  cursor: pointer;
+  align-items: center; justify-content: center;
+  gap: 4px; flex-direction: column;
+}
+.nav-menu-toggle span {
+  display: block; width: 16px; height: 1.5px;
+  border-radius: 999px; background: currentColor;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.nav-menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.nav-menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+.mobile-menu { display: none; }
+.mobile-menu-inner {
+  background: rgba(247,246,243,0.98);
+  backdrop-filter: blur(14px);
+  border-bottom: 0.5px solid var(--border);
+  padding: 16px 20px 24px;
+}
+.nav-mobile-links { display: grid; gap: 10px; }
+.nav-mobile-links a {
+  text-decoration: none; color: var(--ink);
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px; font-size: 15px;
+}
+.nav-mobile-links .nav-cta {
+  justify-content: center; border: none; padding: 14px 16px;
+  display: flex;
+}
+
+/* ── MAIN ── */
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px 60px;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+}
+.screen.active { display: flex; }
+
+/* ── SCREEN 1: INTRO ── */
+.intro-logo { margin-bottom: 36px; }
+.intro-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(30px, 6vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.intro-body {
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.75;
+  max-width: 400px;
+  margin-bottom: 10px;
+}
+.intro-note {
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 1.65;
+  max-width: 380px;
+  margin-bottom: 40px;
+}
+.btn-start {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 16px 40px;
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500;
+  border: none; border-radius: 100px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btn-start:hover { opacity: 0.82; transform: translateY(-1px); }
+.btn-start:active { transform: translateY(0); }
+
+/* ── SCREEN 2: TEST ── */
+.test-progress {
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+.test-card {
+  width: 100%;
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: 20px;
+  padding: 52px 32px 44px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+.test-word {
+  font-size: clamp(64px, 16vw, 92px);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  user-select: none;
+}
+.test-word.kana-only {
+  font-size: clamp(32px, 8vw, 48px);
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+.test-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.test-btn {
+  width: 100%;
+  padding: 16px 24px;
+  border-radius: var(--r);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, transform 0.1s;
+  text-align: center;
+  line-height: 1.3;
+}
+.test-btn:active { transform: scale(0.98); }
+
+.btn-know {
+  background: var(--ink);
+  color: var(--white);
+  border: 0.5px solid var(--ink);
+}
+.btn-know:hover { opacity: 0.85; }
+
+.btn-seen {
+  background: var(--white);
+  color: var(--ink);
+  border: 0.5px solid var(--border);
+}
+.btn-seen:hover { background: var(--paper); border-color: rgba(26,26,26,0.2); }
+
+.btn-unknown {
+  background: transparent;
+  color: var(--ink-3);
+  border: 0.5px solid var(--border-2);
+}
+.btn-unknown:hover { background: var(--paper); color: var(--ink-2); }
+
+/* ── SCREEN 3: RESULT ── */
+.result-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 6vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+.result-rec {
+  font-size: 16px;
+  color: var(--ink-2);
+  line-height: 1.75;
+  max-width: 400px;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+
+.btn-open {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 100%;
+  padding: 16px 32px;
+  background: var(--ink);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500;
+  border: none; border-radius: 100px;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s;
+  margin-bottom: 14px;
+}
+.btn-open:hover { opacity: 0.82; }
+.result-caveat {
+  font-size: 12px;
+  color: var(--ink-3);
+  line-height: 1.65;
+  max-width: 380px;
+  font-style: italic;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 0.5px solid var(--border);
+  padding: 32px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-copy { font-size: 13px; color: var(--ink-3); }
+.footer-mark { display: flex; align-items: center; gap: 10px; }
+.footer-wordmark { font-size: 13px; font-weight: 300; letter-spacing: 0.16em; color: var(--ink-3); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .nav-menu-toggle { display: inline-flex; }
+  .mobile-menu {
+    display: block;
+    position: fixed; top: 60px; left: 0; right: 0;
+    z-index: 90;
+    opacity: 0; pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .mobile-menu.is-open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  footer { flex-direction: column; gap: 14px; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-start, .test-btn, .btn-open { transition: none; }
+  .mobile-menu, .nav-menu-toggle span { transition: none; }
+}
+</style>
+</head>
+<body id="top">
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo" aria-label="Kotobado home">
+    <svg width="28" height="42" viewBox="0 0 52 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <rect x="13" y="0" width="26" height="3.6" rx="1.4" fill="#1A1A1A"/>
+      <rect x="0" y="12.4" width="52" height="3.6" rx="1.4" fill="#1A1A1A"/>
+      <rect x="1.75" y="26.4" width="48.5" height="48.5" rx="3.5" fill="none" stroke="#1A1A1A" stroke-width="3.5"/>
+    </svg>
+    <span class="nav-wordmark">kotobado</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#science">The science</a></li>
+    <li><a href="index.html#features">Features</a></li>
+    <li><a href="index.html#how">How it works</a></li>
+    <li><a href="app.html">App walkthrough</a></li>
+    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSe6r3etyXf-nW-nNKUCnsgvibWEiF4AX7aogFhgOeChWMhsfg/viewform?usp=publish-editor" class="nav-cta" target="_blank" rel="noreferrer">Become a beta tester</a></li>
+  </ul>
+  <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu-inner">
+    <div class="nav-mobile-links">
+      <a href="index.html#science">The science</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#how">How it works</a>
+      <a href="app.html">App walkthrough</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe6r3etyXf-nW-nNKUCnsgvibWEiF4AX7aogFhgOeChWMhsfg/viewform?usp=publish-editor" class="nav-cta" target="_blank" rel="noreferrer">Become a beta tester</a>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- SCREEN 1: INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-logo">
+      <svg width="38" height="57" viewBox="0 0 52 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="13" y="0" width="26" height="3.6" rx="1.4" fill="#1A1A1A"/>
+        <rect x="0" y="12.4" width="52" height="3.6" rx="1.4" fill="#1A1A1A"/>
+        <rect x="1.75" y="26.4" width="48.5" height="48.5" rx="3.5" fill="none" stroke="#1A1A1A" stroke-width="3.5"/>
+      </svg>
+    </div>
+    <h1 class="intro-title">Where do you<br>stand in Japanese?</h1>
+    <p class="intro-body">This short test helps Kotobado understand which words you already know, so you start in the right place. It takes about 3 minutes.</p>
+    <p class="intro-note">You'll see words one at a time. Be honest — there are no right or wrong answers here, only useful ones.</p>
+    <button class="btn-start" id="btn-start">Start</button>
+  </div>
+
+  <!-- SCREEN 2: TEST -->
+  <div class="screen" id="screen-test">
+    <div class="test-progress" id="test-progress">Card 1 of 40</div>
+    <div class="test-card">
+      <div class="test-word" id="test-word">語</div>
+    </div>
+    <div class="test-buttons">
+      <button class="test-btn btn-know"    id="btn-know">I know this</button>
+      <button class="test-btn btn-seen"    id="btn-seen">I've seen it</button>
+      <button class="test-btn btn-unknown" id="btn-unknown">I don't know this</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: RESULT -->
+  <div class="screen" id="screen-result">
+    <h2 class="result-title" id="result-title"></h2>
+    <a href="https://app.kotobado.com" class="btn-open" id="btn-open">Start with the N5 deck</a>
+    <p class="result-caveat">Recognising a word in a test is easier than recalling it from memory. Kotobado will reveal the real gaps once you start reviewing.</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy">© 2026 Kotobado. All rights reserved.</p>
+  <div class="footer-mark">
+    <svg width="18" height="27" viewBox="0 0 52 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="13" y="0" width="26" height="3.6" rx="1.4" fill="#BBBBBB"/>
+      <rect x="0" y="12.4" width="52" height="3.6" rx="1.4" fill="#BBBBBB"/>
+      <rect x="1.75" y="26.4" width="48.5" height="48.5" rx="3.5" fill="none" stroke="#BBBBBB" stroke-width="3.5"/>
+    </svg>
+    <span class="footer-wordmark">kotobado</span>
+  </div>
+</footer>
+
+<script>
+// ── MOBILE NAV ──
+const menuButton = document.querySelector('.nav-menu-toggle');
+const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuLinks = document.querySelectorAll('.nav-mobile-links a');
+
+function setMenuOpen(isOpen) {
+  if (!menuButton || !mobileMenu) return;
+  menuButton.setAttribute('aria-expanded', String(isOpen));
+  menuButton.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  mobileMenu.classList.toggle('is-open', isOpen);
+  document.body.classList.toggle('nav-open', isOpen);
+}
+if (menuButton) {
+  menuButton.addEventListener('click', () => {
+    setMenuOpen(menuButton.getAttribute('aria-expanded') !== 'true');
+  });
+}
+mobileMenuLinks.forEach(l => l.addEventListener('click', () => setMenuOpen(false)));
+window.addEventListener('resize', () => { if (window.innerWidth > 768) setMenuOpen(false); });
+
+// ── WORD POOL ──
+// 10 words per level, concrete nouns and common verbs only.
+// Shuffled within level; always presented N5 → N4 → N3 → N2.
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const LEVELS = [
+  {
+    name: 'N5',
+    words: shuffle([
+      '食べる','飲む','学校','山','水','日本','人','犬',
+      '友達','先生','車','家','電話','駅','花',
+    ]).slice(0, 10),
+  },
+  {
+    name: 'N4',
+    words: shuffle([
+      '料理','旅行','映画','音楽','運動','授業',
+      '仕事','会社','図書館','病院','予約','練習',
+    ]).slice(0, 10),
+  },
+  {
+    name: 'N3',
+    words: shuffle([
+      '経験','場合','意味','関係','問題','文化',
+      '自然','記念','笑顔','季節','約束','景色',
+    ]).slice(0, 10),
+  },
+  {
+    name: 'N2',
+    words: shuffle([
+      '環境','経済','政治','技術','影響',
+      '判断','状況','姿勢','根拠','仮説',
+    ]).slice(0, 10),
+  },
+];
+
+// Flatten into a pool tagged by level index
+let POOL = [];
+LEVELS.forEach((lvl, li) => {
+  lvl.words.forEach(w => POOL.push({ display: w, levelIdx: li }));
+});
+
+// ── STATE ──
+// Per-level scores: { known, seen, total }
+let levelScores = LEVELS.map(() => ({ known: 0, seen: 0, total: 0 }));
+let idx = 0;
+let consecutiveUnknown = 0;
+const EARLY_EXIT = 5;
+const LEVEL_THRESHOLD = 0.60; // below this = drop-off point
+
+// ── SCREENS ──
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ── PROGRESS LABEL ──
+function updateProgress() {
+  const card = POOL[idx];
+  const lvl  = LEVELS[card.levelIdx];
+  const doneInLevel = levelScores[card.levelIdx].total;
+  const totalInLevel = lvl.words.length;
+  document.getElementById('test-progress').textContent =
+    lvl.name + ' · ' + (doneInLevel + 1) + ' of ' + totalInLevel;
+}
+
+// ── TEST FLOW ──
+function loadCard() {
+  if (idx >= POOL.length) { finish(); return; }
+  const card   = POOL[idx];
+  const wordEl = document.getElementById('test-word');
+  wordEl.textContent = card.display;
+  wordEl.className   = 'test-word';
+  updateProgress();
+}
+
+function answer(val) {
+  const card = POOL[idx];
+  const ls   = levelScores[card.levelIdx];
+  ls.total++;
+  if (val === 'know')      { ls.known++;  consecutiveUnknown = 0; }
+  else if (val === 'seen') { ls.seen++;   consecutiveUnknown = 0; }
+  else                     {              consecutiveUnknown++;  }
+
+  idx++;
+
+  // Early exit: 5 consecutive unknowns
+  if (consecutiveUnknown >= EARLY_EXIT) { finish(); return; }
+
+  // Also exit early if just finished a level and that level was below threshold
+  if (idx < POOL.length) {
+    const nextLevelIdx = POOL[idx].levelIdx;
+    const prevLevelIdx = card.levelIdx;
+    if (nextLevelIdx !== prevLevelIdx) {
+      const prev = levelScores[prevLevelIdx];
+      const rate = prev.total > 0 ? (prev.known + prev.seen * 0.5) / prev.total : 0;
+      if (rate < LEVEL_THRESHOLD) { finish(); return; }
+    }
+  }
+
+  if (idx >= POOL.length) { finish(); return; }
+  loadCard();
+}
+
+// ── FINISH ──
+function finish() {
+  // Find the highest level where the user scored ≥ threshold
+  // and the first level where they dropped below
+  let lastStrongLevel = -1; // index of highest passing level
+  let dropLevel       = -1; // index of first failing level
+
+  LEVELS.forEach((_, li) => {
+    const ls   = levelScores[li];
+    if (ls.total === 0) return;
+    const rate = (ls.known + ls.seen * 0.5) / ls.total;
+    if (rate >= LEVEL_THRESHOLD) lastStrongLevel = li;
+    else if (dropLevel === -1)   dropLevel = li;
+  });
+
+  // Build honest observation sentence
+  let observation;
+  const testedLevels = LEVELS.filter((_, i) => levelScores[i].total > 0).map(l => l.name);
+
+  if (lastStrongLevel === -1) {
+    // Failed even N5
+    observation = 'Most of the N5 words were unfamiliar.';
+  } else if (dropLevel === -1) {
+    // Passed everything tested
+    const last = LEVELS[lastStrongLevel].name;
+    if (lastStrongLevel === LEVELS.length - 1) {
+      observation = 'You knew words across all levels we tested.';
+    } else {
+      observation = 'You knew most of the ' + last + ' words we tested.';
+    }
+  } else {
+    // Clear drop-off
+    const strong = LEVELS[lastStrongLevel].name;
+    const drop   = LEVELS[dropLevel].name;
+    observation  = 'You knew most of the ' + strong + ' words but fewer than half the ' + drop + ' words.';
+  }
+
+  // Recommended deck = one level above where they dropped, capped
+  let recLevelIdx;
+  if (lastStrongLevel === -1) {
+    recLevelIdx = 0; // N5
+  } else if (dropLevel === -1) {
+    recLevelIdx = Math.min(lastStrongLevel + 1, LEVELS.length - 1);
+  } else {
+    recLevelIdx = dropLevel;
+  }
+
+  const recDeck = LEVELS[recLevelIdx].name;
+
+  document.getElementById('result-title').textContent = observation;
+  document.getElementById('btn-open').textContent = 'Start with the ' + recDeck + ' deck';
+
+  showScreen('screen-result');
+}
+
+// ── RESET ──
+function reset() {
+  LEVELS.forEach((lvl, li) => {
+    lvl.words = shuffle(lvl.words);
+    levelScores[li] = { known: 0, seen: 0, total: 0 };
+  });
+  POOL = [];
+  LEVELS.forEach((lvl, li) => {
+    lvl.words.forEach(w => POOL.push({ display: w, levelIdx: li }));
+  });
+  idx = 0;
+  consecutiveUnknown = 0;
+  loadCard();
+  showScreen('screen-test');
+}
+
+// ── EVENTS ──
+document.getElementById('btn-start').addEventListener('click', () => {
+  loadCard();
+  showScreen('screen-test');
+});
+document.getElementById('btn-know').addEventListener('click',    () => answer('know'));
+document.getElementById('btn-seen').addEventListener('click',    () => answer('seen'));
+document.getElementById('btn-unknown').addEventListener('click', () => answer('unknown'));
+</script>
+</body>
+</html>
